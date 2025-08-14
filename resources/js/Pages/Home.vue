@@ -3,6 +3,7 @@
 </script>
 
 <template>
-        <Head title=" | Home" />
-        <h1>Home</h1>
+        <Head :title="` | ${$page.component}`" />
+        <h1>hello {{ $page.props.user }}</h1>
+
 </template>
