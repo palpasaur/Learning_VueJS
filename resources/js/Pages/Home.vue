@@ -4,6 +4,10 @@
 
 <template>
         <Head :title="` | ${$page.component}`" />
-        <h1>hello {{ $page.props.user }}</h1>
+        <h1>Home</h1>
 
+        
+        <!-- <h1>hello {{ $page.props.auth.user }}</h1> -->
+        <!-- <Link class="mt-[600px] block" href="/" preserve-scroll>Refresh</Link> -->
+        <!-- using preserve-scroll preserves the scroll position when navigating -->
 </template>
