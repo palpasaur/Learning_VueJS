@@ -4,15 +4,24 @@
 
 <template>
     <div>
-        <header>
-            <nav>
+        <header class="bg-white shadow-md">
+            <nav class="max-w-6xl mx-auto flex justify-between items-center py-4 px-6">
+                <!-- Left Nav Links -->
                 <div class="space-x-6">
-                    <!-- <Link :href="route('home')">Home</Link>
-                    <Link :href="route('about')">About</Link> -->
-                    <Link :href="route('home')" class="nav-link">Home</Link>
+                    <Link :href="route('home')" class="text-gray-700 hover:text-blue-600 font-medium transition">
+                    Home
+                    </Link>
+                </div>
+
+                <!-- Right Nav Links -->
+                <div class="space-x-6">
+                    <Link :href="route('register')" class="text-gray-700 hover:text-blue-600 font-medium transition">
+                    Register
+                    </Link>
                 </div>
             </nav>
         </header>
+
 
         <main class="p-4">
             <slot />

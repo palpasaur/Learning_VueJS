@@ -4,7 +4,7 @@
 
 <template>
         <Head :title="` | ${$page.component}`" />
-        <h1>Home</h1>
+        <h1 class="text-2xl font-bold">Home</h1>
 
         
         <!-- <h1>hello {{ $page.props.auth.user }}</h1> -->
