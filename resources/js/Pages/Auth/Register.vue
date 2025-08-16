@@ -1,17 +1,19 @@
 <script setup>
-import { reactive } from 'vue';
-import { router } from '@inertiajs/vue3';
+// import { reactive } from 'vue';
+import { useForm } from '@inertiajs/vue3';
 
-const form = reactive({
+const form = useForm({
     name: null,
     email: null,
-    passwod: null,
+    password: null,
     password_confirmation: null,
-})
+});
 
 const submit = () => {
-    router.post("/register", form);
-}
+    form.post(route("register"), {
+        onError: () => form.reset("password", "password_confirmation"),
+    });
+};
 </script>
 
 <template>
@@ -28,15 +30,17 @@ const submit = () => {
                     v-model="form.name"
                     class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
+                <small class="text-red-500">{{ form.errors.name }}</small>
             </div>
 
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
                 <input 
-                    type="email" 
+                    type="text" 
                     v-model="form.email"
                     class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
+                <small class="text-red-500">{{ form.errors.email }}</small>
             </div>
 
             <div>
@@ -46,6 +50,7 @@ const submit = () => {
                     v-model="form.password"
                     class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
+                <small class="text-red-500">{{ form.errors.password }}</small>
             </div>
 
             <div>
@@ -65,7 +70,7 @@ const submit = () => {
                 <button 
                     type="submit" 
                     class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition duration-200"
-                >
+                    :disabled="form.processing">
                     Register
                 </button>
             </div>
