@@ -1,6 +1,7 @@
 <script setup>
 // import { reactive } from 'vue';
 import { useForm } from '@inertiajs/vue3';
+import TextInput from '../Components/TextInput.vue';    
 
 const form = useForm({
     name: null,
@@ -24,42 +25,37 @@ const submit = () => {
     <div class="w-full max-w-md mx-auto bg-white shadow-lg rounded-lg p-6">
         <form @submit.prevent="submit" class="space-y-6">
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Name</label>
-                <input 
-                    type="text" 
-                    v-model="form.name"
-                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-                <small class="text-red-500">{{ form.errors.name }}</small>
+               <TextInput 
+                   name="name"
+                   v-model="form.name"
+                   :message="form.errors.name"
+               />
             </div>
 
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                <input 
-                    type="text" 
-                    v-model="form.email"
-                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-                <small class="text-red-500">{{ form.errors.email }}</small>
+               <TextInput 
+                   name="email"
+                   v-model="form.email"
+                   :message="form.errors.email"
+               />
             </div>
 
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
-                <input 
-                    type="password" 
-                    v-model="form.password"
-                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-                <small class="text-red-500">{{ form.errors.password }}</small>
+               <TextInput 
+                   name="password"
+                   type="password"
+                   v-model="form.password"
+                   :message="form.errors.password"
+               />
             </div>
 
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Confirm Password</label>
-                <input 
-                    type="password" 
-                    v-model="form.password_confirmation"
-                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
+               <TextInput 
+                   name="password_confirmation"
+                   type="password"
+                   v-model="form.password_confirmation"
+                   
+               />
             </div>
 
             <div class="flex flex-col items-center">
