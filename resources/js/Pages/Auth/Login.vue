@@ -4,15 +4,14 @@ import { useForm } from "@inertiajs/vue3";
 import TextInput from "../Components/TextInput.vue";
 
 const form = useForm({
-    name: null,
     email: null,
     password: null,
-    password_confirmation: null,
+    remember: null,
 });
 
 const submit = () => {
-    form.post(route("register"), {
-        onError: () => form.reset("password", "password_confirmation"),
+    form.post(route("login"), {
+        onError: () => form.reset("password"),
     });
 };
 </script>
@@ -20,18 +19,10 @@ const submit = () => {
 <template>
     <Head :title="` | ${$page.component}`" />
 
-    <h1 class="title">Register a new account</h1>
+    <h1 class="title">Login to your account</h1>
 
     <div class="w-2/4 mx-auto">
         <form @submit.prevent="submit" class="space-y-6">
-            <div>
-                <TextInput
-                    name="name"
-                    v-model="form.name"
-                    :message="form.errors.name"
-                />
-            </div>
-
             <div>
                 <TextInput
                     name="email"
@@ -49,25 +40,29 @@ const submit = () => {
                 />
             </div>
 
-            <div>
-                <TextInput
-                    name="password_confirmation"
-                    type="password"
-                    v-model="form.password_confirmation"
-                />
+            <div class="flex items-center justify-between mb-2">
+                <div class="flex items-center gap-2">
+                    <input
+                        type="checkbox"
+                        v-model="form.remember"
+                        id="remember"
+                    />
+                    <label for="remember">Remember me</label>
+                </div>
+
+                <p class="text-slate-600">
+                    Need an account?
+                    <a :href="route('register')" class="text-link">Register</a>
+                </p>
             </div>
 
             <div class="flex flex-col">
-                <p class="text-slate-600 mb-2">
-                    Already a user?
-                    <a :href="route('login')" class="text-link">Login</a>
-                </p>
                 <button
                     type="submit"
                     class="primary-btn"
                     :disabled="form.processing"
                 >
-                    Register
+                    Login
                 </button>
             </div>
         </form>
