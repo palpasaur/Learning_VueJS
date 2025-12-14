@@ -8,11 +8,25 @@
             <nav>
                 <!-- Left Nav Links -->
                 <div class="space-x-6">
-                    <Link :href="route('home')" class="nav-link"> Home </Link>
+                    <Link
+                        :href="route('home')"
+                        class="nav-link"
+                        :class="{ 'bg-slate-700': $page.component === 'Home' }"
+                    >
+                        Home
+                    </Link>
                 </div>
 
                 <div v-if="$page.props.auth.user">
-                    <p>Welcome, {{ $page.props.auth.user.name }}</p>
+                    <Link
+                        :href="route('dashboard')"
+                        class="nav-link"
+                        :class="{
+                            'bg-slate-700': $page.component === 'Dashboard',
+                        }"
+                    >
+                        Dashboard
+                    </Link>
                     <Link
                         :href="route('logout')"
                         method="post"
@@ -26,10 +40,24 @@
 
                 <!-- Right Nav Links -->
                 <div v-else class="space-x-6">
-                    <Link :href="route('register')" class="nav-link">
+                    <Link
+                        :href="route('register')"
+                        class="nav-link"
+                        :class="{
+                            'bg-slate-700': $page.component === 'Auth/Register',
+                        }"
+                    >
                         Register
                     </Link>
-                    <Link :href="route('login')" class="nav-link"> Login </Link>
+                    <Link
+                        :href="route('login')"
+                        class="nav-link"
+                        :class="{
+                            'bg-slate-700': $page.component === 'Auth/Login',
+                        }"
+                    >
+                        Login
+                    </Link>
                 </div>
             </nav>
         </header>

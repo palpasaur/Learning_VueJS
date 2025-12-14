@@ -1,18 +1,25 @@
 <?php
 
-use App\Http\Controllers\AuthController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 
+Route::inertia('/', 'Home', ['users' => User::paginate(5)])->name('home');
 
-// Route::get('/', function () {
-//     // sleep(2);
-//     return Inertia::render('Home');
-// })->name('home');
+Route::middleware('auth')->group(function () {
+    // Route::inertia('/profile', 'Profile')->name('profile');
+    Route::inertia('/dashboard', 'Dashboard')->name('dashboard');
 
-Route::inertia('/', 'Home')->name('home');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+});
 
-Route::inertia('/register', 'Auth/Register')->name('register');
-Route::post('/register', [AuthController::class, 'register']);
+Route::middleware('guest')->group(function () {
+    Route::inertia('/register', 'Auth/Register')->name('register');
+    Route::post('/register', [AuthController::class, 'register']);
+
+    Route::inertia('/login', 'Auth/Login')->name('login');
+    Route::post('/login', [AuthController::class, 'login']);
+});
 
 #same functionality above
 // Route::get('/about', function () {
@@ -21,8 +28,3 @@ Route::post('/register', [AuthController::class, 'register']);
 
 #shortened version above
 // Route::inertia('/about', 'About', ['user' => 'pal']);
-
-Route::inertia('/login', 'Auth/Login')->name('login');
-Route::post('/login', [AuthController::class, 'login']);
-
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
